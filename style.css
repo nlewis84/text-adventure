@@ -1,0 +1,26 @@
+body {
+    text-align: center;
+}
+
+.full-character-sheet {
+    margin: 0 30px;
+    border: 1px solid black;
+}
+
+.top-box {
+    display: flex;
+}
+
+.stats {
+    flex: 3;
+    border: 1px solid black;
+}
+
+.name {
+    flex: 2;
+    border: 1px solid black;    
+}
+
+span {
+    font-weight: 700;
+}
