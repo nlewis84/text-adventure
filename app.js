@@ -1,3 +1,32 @@
+//// DEBUG BUTTONS
+// Death
+const debugKillYourself = document.querySelector("#killYourself");
+debugKillYourself.addEventListener('click', function () {
+    currentCharacterPoints.hitPoints -= 4;
+    updateStats();
+})
+// Insanity
+const debugDriveInsane = document.querySelector("#driveInsane");
+debugDriveInsane.addEventListener('click', function () {
+    currentCharacterPoints.sanityPoints -= 20;
+    updateStats();
+})
+// Hide Character Sheet
+const debugHideCharacterSheet = document.querySelector("#hideCharacterSheet");
+debugHideCharacterSheet.addEventListener('click', function () {
+    if (document.querySelector("#full-character-sheet").style.display === "block") {
+        function toggleCharacterSheetOff() {
+            document.querySelector("#full-character-sheet").style.display = "none";
+        };
+        toggleCharacterSheetOff();
+    } else {
+        function toggleCharacterSheetOn() {
+            document.querySelector("#full-character-sheet").style.display = "block";
+        };
+        toggleCharacterSheetOn();
+    }
+})
+
 //// End of Game
 // DEATH
 function death() {
@@ -10,6 +39,7 @@ function death() {
         return true;
     }
     if (gameOver(availableCharacters) === true) {
+        displayNoneActiveParagraph()                                // THIS MAY BE REDUNDANT
         alert("GAME OVER")
         alert("There are no more characters left to continue your story")
         alert("Refresh this page to restart the game")
@@ -50,8 +80,8 @@ function insane() {
 var availableCharacters = {
     grunewaldAvailable: true,
     holtAvailable: true,
-    mcshaneAvailable: false,
-    wilsonAvailable: false
+    mcshaneAvailable: false,    // TURN THIS TO TRUE ONCE YOU MAKE THESE CHARACTERS
+    wilsonAvailable: false    // TURN THIS TO TRUE ONCE YOU MAKE THESE CHARACTERS
 }
 
 // Blank Current Character
@@ -95,6 +125,18 @@ buttonGrunewald.addEventListener('click', function selectGrunewald() {
     currentCharacterHP = grunewaldPoints.hitPoints;
     currentCharacterSP = grunewaldPoints.sanityPoints;
     currentCharacterName.innerText = currentCharacterInfo.name;
+    currentCharacterStatsStr.innerText = currentCharacterStats.str;
+    currentCharacterStatsDex.innerText = currentCharacterStats.dex;
+    currentCharacterStatsInt.innerText = currentCharacterStats.int;
+    currentCharacterStatsIdea.innerText = currentCharacterStats.idea;
+    currentCharacterStatsCon.innerText = currentCharacterStats.con;
+    currentCharacterStatsApp.innerText = currentCharacterStats.app;
+    currentCharacterStatsPow.innerText = currentCharacterStats.pow;
+    currentCharacterStatsLuck.innerText = currentCharacterStats.luck;
+    currentCharacterStatsSiz.innerText = currentCharacterStats.siz;
+    currentCharacterStatsSan.innerText = currentCharacterStats.san;
+    currentCharacterStatsEdu.innerText = currentCharacterStats.edu;
+    currentCharacterStatsKnow.innerText = currentCharacterStats.know;
     updateStats();
     function displayNoneGrunewaldButton() {
         document.querySelector("#selectGrunewald").style.display = "none";
@@ -104,7 +146,12 @@ buttonGrunewald.addEventListener('click', function selectGrunewald() {
         document.querySelector("#characterSelectDiv").style.display = "none";
     };
     displayNone();
+    function displayNoneCharacterSheet() {
+        document.querySelector("#full-character-sheet").style.display = "block";
+    };
+    displayNoneCharacterSheet();
     availableCharacters.grunewaldAvailable = false;
+    displayActiveParagraph()
 })
 
 // Ernest Holt
@@ -120,6 +167,18 @@ buttonHolt.addEventListener('click', function selectHolt() {
     currentCharacterHP = holtPoints.hitPoints;
     currentCharacterSP = holtPoints.sanityPoints;
     currentCharacterName.innerText = holtInfo.name;
+    currentCharacterStatsStr.innerText = currentCharacterStats.str;
+    currentCharacterStatsDex.innerText = currentCharacterStats.dex;
+    currentCharacterStatsInt.innerText = currentCharacterStats.int;
+    currentCharacterStatsIdea.innerText = currentCharacterStats.idea;
+    currentCharacterStatsCon.innerText = currentCharacterStats.con;
+    currentCharacterStatsApp.innerText = currentCharacterStats.app;
+    currentCharacterStatsPow.innerText = currentCharacterStats.pow;
+    currentCharacterStatsLuck.innerText = currentCharacterStats.luck;
+    currentCharacterStatsSiz.innerText = currentCharacterStats.siz;
+    currentCharacterStatsSan.innerText = currentCharacterStats.san;
+    currentCharacterStatsEdu.innerText = currentCharacterStats.edu;
+    currentCharacterStatsKnow.innerText = currentCharacterStats.know;
     currentCharacterMagicPoints.innerText = holtPoints.magicPoints;
     currentCharacterHealthPoints.innerText = holtPoints.hitPoints;
     currentCharacterSanityPoints.innerText = holtPoints.sanityPoints;
@@ -132,6 +191,10 @@ buttonHolt.addEventListener('click', function selectHolt() {
         document.querySelector("#characterSelectDiv").style.display = "none";
     };
     displayNone();
+    function displayNoneCharacterSheet() {
+        document.querySelector("#full-character-sheet").style.display = "block";
+    };
+    displayNoneCharacterSheet();
     availableCharacters.holtAvailable = false;
 })
 
@@ -149,7 +212,7 @@ function rollDice(numDice, sides) {
 //                                                                                                              Need to add a way to input "skill"
 function skillTest(skill) {
     if ((Math.floor(Math.random() * 100) + 1) - currentCharacterSkills[skill] >= 1) {
-        console.log("Success!");                                                                                // Need this to display more nicely
+        console.log("Success!");                                                                                // Need this to display more for player
     } else {
         console.log("Failure!");
     }
@@ -373,3 +436,77 @@ const holtMisc = {
     Friends: "Louis Grunewald and Nora McShane",
     Commanded: "Devon Wilson"
 }
+
+//// Passage of Time
+// Date
+var currentDate = 1;
+function refreshDate() {
+    if (currentDate === 1) {
+        currentDateIndex.innerText = `Investigation has been active for ${currentDate} day.`;
+    } else {
+        currentDateIndex.innerText = `Investigation has been active for ${currentDate} days.`;
+    }
+}
+refreshDate();
+
+// Advance Days
+function advanceDays(numberToAdvance = 1) {
+    currentDate += numberToAdvance;
+    refreshDate();
+}
+
+
+//// Paragraph Advancement
+// Active Paragraph
+var activeParagraph = "#thirteen";
+// Previous Paragraph
+var previousParagraph = "";
+// Turning off and on paragraphs
+function displayNoneActiveParagraph() {
+    document.querySelector(activeParagraph).style.display = "none";
+};
+function displayActiveParagraph() {
+    document.querySelector(activeParagraph).style.display = "block";
+};
+
+
+// To 102 test
+const to102 = document.querySelectorAll(".to102");
+[...to102].forEach(function (item) {
+    item.addEventListener('click', function () {
+        displayNoneActiveParagraph();
+        previousParagraph = activeParagraph
+        activeParagraph = "#onehundredtwo";
+        displayActiveParagraph();
+    })
+})
+// To 120 test
+const to120 = document.querySelectorAll(".to120");
+[...to120].forEach(function (item) {
+    item.addEventListener('click', function to120() {
+        displayNoneActiveParagraph();
+        previousParagraph = activeParagraph
+        activeParagraph = "#onehundred20";
+        displayActiveParagraph();
+    })
+})
+// To 147 test
+const to147 = document.querySelectorAll(".to147");
+[...to147].forEach(function (item) {
+    item.addEventListener('click', function to147() {
+        displayNoneActiveParagraph();
+        previousParagraph = activeParagraph
+        activeParagraph = "#onehundred47";
+        displayActiveParagraph();
+    })
+})
+// To Arkham Locations test
+const toArkhamLocations = document.querySelectorAll(".toArkhamLocations");
+[...toArkhamLocations].forEach(function (item) {
+    item.addEventListener('click', function allArkhamLocations() {
+        displayNoneActiveParagraph();
+        previousParagraph = activeParagraph
+        activeParagraph = "#arkhamLocations";
+        displayActiveParagraph();
+    })
+})

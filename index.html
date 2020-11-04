@@ -20,9 +20,28 @@
         </div>
     </div>
     <h2>Alone Against The Dark</h2>
-    <div class="full-character-sheet">
+    <div id="full-character-sheet">
         <div class="top-box" id="currentCharacterSheet">
-            <div class="stats">Investigator Statistics</div>
+            <div class="stats">INVESTIGATOR STATISTICS
+                <div class="actual-stats">
+                    <div class="actual-stats-nums">STR <span id="currentCharacterStatsStr"></span></div>
+                    <div class="actual-stats-nums">DEX <span id="currentCharacterStatsDex"></span></div>
+                    <div class="actual-stats-nums">INT <span id="currentCharacterStatsInt"></span></div>
+                    <div class="actual-stats-nums">Idea <span id="currentCharacterStatsIdea"></span></div>
+                </div>
+                <div class="actual-stats">
+                    <div class="actual-stats-nums">CON <span id="currentCharacterStatsCon"></span></div>
+                    <div class="actual-stats-nums">APP <span id="currentCharacterStatsApp"></span></div>
+                    <div class="actual-stats-nums">POW <span id="currentCharacterStatsPow"></span></div>
+                    <div class="actual-stats-nums">Luck <span id="currentCharacterStatsLuck"></span></div>
+                </div>
+                <div class="actual-stats">
+                    <div class="actual-stats-nums">SIZ <span id="currentCharacterStatsSiz"></span></div>
+                    <div class="actual-stats-nums">SAN <span id="currentCharacterStatsSan"></span></div>
+                    <div class="actual-stats-nums">EDU <span id="currentCharacterStatsEdu"></span></div>
+                    <div class="actual-stats-nums">Know <span id="currentCharacterStatsKnow"></span></div>
+                </div>
+            </div>
             <div class="name">
                 <div class="info">
                     Name: <span id="currentCharacterName"></span>
@@ -37,6 +56,67 @@
                     Current Sanity Points: <span id="currentCharacterSanityPoints"></span>
                 </div>
             </div>
+        </div>
+    </div>
+    <div>
+        <h3 id="currentDateIndex"></h3>
+    </div>
+    <div class="paragraphs-and-checks">
+        <div class="checks">
+            <button id="killYourself">Kill yourself</button>
+            <button id="driveInsane">Drive yourself insane</button>
+            <button id="hideCharacterSheet">Hide Character Sheet</button>
+        </div>
+        <div class="paragraphs">
+            <p id="thirteen">
+                For you, Professor Louis Grunewald, this first day of September, 1931, has been tiring and
+                uncomfortable. Light mist has covered Arkham for most of the day. You held two uninspired undergraduate
+                classes at Miskatonic University. You also met with the new chairman of the Literature Department, a
+                giddy Technocrat. You survey your desk and see that a stack of papers to grade has already formed.
+                You're enjoying your second pipe of the evening when the doorbell rings. To your surprise, it's a
+                telegraphic messenger.</br></br>
+                "It arrived at Kingspoint Head station not more than an hour ago,"the boy says. You sign for it, and
+                slip a dime into the youngster's hand. "Oh, thank you, sir!" You open the envelope and scan the
+                contents.</br></br>
+                <strong>ATHENS, GREECE 9/1/31 via Kingspoint Station</br></br>
+                    IN JAIL FOR ANTIQUITY THEFT STOP NEED HELP STOP CAN YOU COME STOP URGENT STOP SEE CORPORAL ILIONAS,
+                    ATHENS BUREAU OF INVESTIGATION.</br></br>
+                    GLIERE</strong></br></br>
+                My goodness, you think. Imagine! Dotty old Gliere in prison! You recall that he had gone to Greece to
+                work on his book concerning primitive myth. What has he gotten himself into? Should you wire money? You
+                recall all the amusing discussions you've had with him, and a sudden insight lets you understand that
+                Tibor Gliere had no close friends - except you. Should you go help him? You suppose the University will
+                grant you leave. But, do you want to go?</br></br>
+                With uncommon speed you decide to go to Athens to help Gliere. You write him a wire, and another to
+                Ernest Holt, a wealthy New York financier and a good friend of yours. If you get into hot water, Holt
+                will help. And you decide to keep him posted on your progress. You give both telegrams to the waiting
+                messenger, along with the necessary fund.</br></br>
+                What to do now? You have four dollars left in your waller - you'll go to the bank first thing in the
+                morning. Trans-Atlantic schedules - the Advertiser surely carries that information. As you pack, you
+                wonder if you should check Gliere's room at Mrs. Harding's boarding house. Maybe you could get a clue
+                about Gliere's activities or a hint about his arrest.</br></br>
+                Your passpost's in order; your clothes and sundries are packed. You'd best turn in. You're going on a
+                little trip. When you awake, it is Sept. 2;
+                <button class="to102 advanceDays">Next</button>
+            </p>
+            <p id="onehundredtwo">
+                If it is after September 8th, <button class="to147">Click Here</button> If not and if you're Grunewald,
+                you can rest and have a repast: <button class="toArkhamLocations">go to any Arkham location</button> If
+                you're not Grunewald, <button class="to120">Click Here</button>
+            </p>
+            <p id="onehundred20">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolorem, labore consequatur
+                temporibus sapiente dolor, ipsum doloribus itaque sit ea ex distinctio illum molestiae commodi similique
+                nam sunt, nihil voluptatum.
+            </p>
+            <p id="onehundred47">
+                Grunewald's room loks as though someone departed hastily. <button class="to102">Next</button>
+            </p>
+            <p id="arkhamLocations">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis eius delectus recusandae! Eaque
+                numquam libero ipsum porro dicta commodi inventore tempora quos sed quasi nihil, asperiores illo
+                consequatur, suscipit fugiat.
+            </p>
         </div>
     </div>
     <script src="app.js"></script>

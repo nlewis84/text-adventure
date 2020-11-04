@@ -2,7 +2,8 @@ body {
     text-align: center;
 }
 
-.full-character-sheet {
+#full-character-sheet {
+    display: none;
     margin: 0 30px;
     border: 1px solid black;
 }
@@ -12,15 +13,52 @@ body {
 }
 
 .stats {
+    padding: 0 30px;
     flex: 3;
     border: 1px solid black;
 }
 
 .name {
+    text-align: center;
+    padding: 0 30px;
     flex: 2;
     border: 1px solid black;    
+    font-size: 14px;
 }
 
 span {
     font-weight: 700;
+    font-size: 2em;
+}
+
+.paragraphs-and-checks {
+    padding: 0 30px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.paragraphs {
+    text-align: justify;
+    padding: 30px;
+    flex: 4;
+}
+
+.checks {
+    flex: 3;
+}
+
+.actual-stats {
+    display: flex;
+}
+
+.actual-stats-nums {
+    flex: 1;
+}
+
+p {
+    display: none;
+}
+
+h3 {
+    margin-top: 30px;
 }
