@@ -1,7 +1,7 @@
 //// DEBUG BUTTONS
 // Death
-const debugKillYourself = document.querySelector("#killYourself");
-debugKillYourself.addEventListener('click', function () {
+const debugKillCharacter = document.querySelector("#killCharacter");
+debugKillCharacter.addEventListener('click', function () {
     currentCharacterPoints.hitPoints -= 4;
     updateStats();
 })
@@ -11,7 +11,7 @@ debugDriveInsane.addEventListener('click', function () {
     currentCharacterPoints.sanityPoints -= 20;
     updateStats();
 })
-// Hide Character Sheet
+// Character Sheet 
 const debugHideCharacterSheet = document.querySelector("#hideCharacterSheet");
 debugHideCharacterSheet.addEventListener('click', function () {
     if (document.querySelector("#full-character-sheet").style.display === "block") {
@@ -26,6 +26,15 @@ debugHideCharacterSheet.addEventListener('click', function () {
         toggleCharacterSheetOn();
     }
 })
+
+//// Hide Objects
+// Character Select 
+function displayNone() {
+    document.querySelector("#characterSelectDiv").style.display = "none";
+};
+function displayNoneCharacterSheet() {
+    document.querySelector("#full-character-sheet").style.display = "block";
+};
 
 //// End of Game
 // DEATH
@@ -142,13 +151,7 @@ buttonGrunewald.addEventListener('click', function selectGrunewald() {
         document.querySelector("#selectGrunewald").style.display = "none";
     };
     displayNoneGrunewaldButton();
-    function displayNone() {
-        document.querySelector("#characterSelectDiv").style.display = "none";
-    };
     displayNone();
-    function displayNoneCharacterSheet() {
-        document.querySelector("#full-character-sheet").style.display = "block";
-    };
     displayNoneCharacterSheet();
     availableCharacters.grunewaldAvailable = false;
     displayActiveParagraph()
@@ -187,15 +190,12 @@ buttonHolt.addEventListener('click', function selectHolt() {
         document.querySelector("#selectHolt").style.display = "none";
     };
     displayNoneHoltButton();
-    function displayNone() {
-        document.querySelector("#characterSelectDiv").style.display = "none";
-    };
     displayNone();
-    function displayNoneCharacterSheet() {
-        document.querySelector("#full-character-sheet").style.display = "block";
-    };
     displayNoneCharacterSheet();
     availableCharacters.holtAvailable = false;
+    previousParagraph = activeParagraph
+    activeParagraph = "#thirtySix";
+    displayActiveParagraph();
 })
 
 //// Dice
@@ -468,7 +468,7 @@ function displayNoneActiveParagraph() {
 function displayActiveParagraph() {
     document.querySelector(activeParagraph).style.display = "block";
 };
-
+//////////////////////////////////////////////////////////////////////////make a naming convention that works for this better! make a function
 
 // To 102 test
 const to102 = document.querySelectorAll(".to102");
@@ -480,6 +480,7 @@ const to102 = document.querySelectorAll(".to102");
         displayActiveParagraph();
     })
 })
+
 // To 120 test
 const to120 = document.querySelectorAll(".to120");
 [...to120].forEach(function (item) {

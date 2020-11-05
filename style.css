@@ -1,5 +1,9 @@
+/* color scheme --- #0d1b2a #1b263b #415a77 #778da9 #faf9f9 */
+
 body {
     text-align: center;
+    background-color: #e0e1dd;
+    color: #0d1b2a;
 }
 
 #full-character-sheet {
@@ -12,17 +16,37 @@ body {
     display: flex;
 }
 
+.boxes {
+    background-color: #778da9;
+    color: #faf9f9;
+    border: 2px solid #555b6e;
+    border-radius: 30px;
+    display: inline;
+    margin: 0 10px;
+    flex: 1;
+    height: 60px;
+    line-height: 55px;
+    text-align: center;
+}
+
+button {
+    background-color: #778da9;
+    color: #faf9f9;
+    border-radius: 30px;
+    margin: 1px 0;
+}
+
 .stats {
     padding: 0 30px;
     flex: 3;
-    border: 1px solid black;
+    border: 1px solid 555b6e;
 }
 
 .name {
     text-align: center;
     padding: 0 30px;
     flex: 2;
-    border: 1px solid black;    
+    border: 1px solid 555b6e;    
     font-size: 14px;
 }
 
@@ -35,6 +59,7 @@ span {
     padding: 0 30px;
     display: flex;
     flex-direction: row-reverse;
+    justify-content: center;
 }
 
 .paragraphs {
@@ -45,6 +70,8 @@ span {
 
 .checks {
     flex: 3;
+    display: flex;
+    padding: 30px;
 }
 
 .actual-stats {
