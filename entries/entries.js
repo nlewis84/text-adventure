@@ -141,7 +141,7 @@ TelephoneEntry:
   telephoneParagraph: ``,
   paragraph: `He's lying.`,
   goTo: "Previous",
-  telephone: false,
+  telephone: true,
   previous: [166, 177],
 }
 */
@@ -182,7 +182,7 @@ const Entries = {
     telephone: false,
     previous: [52],
   },
-  3: {
+  3: (currentCharacter, currentDate, locationsVisited) => ({
     type: "SpecialActionEntry",
     locationName: "Arkham First National Bank",
     paragraph: `Deposits and withdrawals are possible between 9 - 3, M·F. If you're Prof. Grunewald, your account is here and you can withdraw up to the amount noted on the investigator sheet, or the current balance as entered in your journal. From here you can go to any Arkham location.`,
@@ -208,7 +208,7 @@ const Entries = {
     ],
     telephone: false,
     previous: ["Arkham"],
-  },
+  }),
   4: {
     type: "PreviousLocationEntry",
     locationName: null,
@@ -456,7 +456,129 @@ const Entries = {
     telephone: false,
     previous: [1],
   },
-  102: (currentDate) => currentDate > new Date(1931, 8, 1) && locationsVisited.includes(102)
+  14: {
+    type: "SkillCheckEntry",
+    locationName: null,
+    paragraph: `You crouched in the gloomy shadows. Soon you hear slow, shuffling footsteps from many directions. Do you wish you'd run instead? Somehow you count yourself glad that you can't make out the faces of the approaching figures- figures which move as though alive, and yet remind you of the dead! Now you're sure they see you. You begin to panic.`,
+    skillCheck: {
+      skill: ["Fast Talk", "Credit Rating"],
+      passText: "",
+      passGoTo: [
+        {
+          text: "You try to talk your way out of this",
+          location: 31,
+          advance: {
+            amount: 1,
+            type: "Hour"
+          }
+        }
+      ],
+      failText: ``,
+      failGoTo: [
+        {
+          text: "You try to talk your way out of this",
+          location: 31,
+          advance: {
+            amount: 1,
+            type: "Hour"
+          }
+        }
+      ]
+    },
+    goTo: [
+      {
+        text: "You run away",
+        location: 27,
+        advance: {
+          amount: 1,
+          type: "Hour"
+        }
+      },
+    ],
+    telephone: false,
+    previous: [194],
+  },
+  15: {
+    type: "SingleChoiceEntry",
+    locationName: null,
+    paragraph: `Nobody goes near the European driver. Perhaps there's something odd about that. The old fellow looks shaky, but serene. The young driver looks friendly, but perhaps overly brash.`,
+    goTo: [
+      {
+        text: "You approach the drivers",
+        location: 58,
+        advance: {
+          amount: 1,
+          type: "Hour"
+        }
+      }
+    ],
+    telephone: false,
+    previous: [58],
+  },
+  16: {
+    type: "TelephoneEntry",
+    locationName: "Arkham Depot",
+    telephoneParagraph: `Trains for Boston leave at 9am, noon, and 5pm The trip takes an hour and costs $125.`,
+    paragraph: `You may purchase a ticket for the train and wait here, or go to any other Arkham location`,
+    specialAction: [
+      {
+        text: "Purchase a ticket to Boston",
+        action: "Purchase Ticket",
+      }
+    ],
+    goTo: [
+      {
+        text: "You decide to head to another Arkham location",
+        location: "Arkham",
+        advance: {
+          amount: 1,
+          type: "Hour"
+        }
+      },
+      {
+        text: "You board the train to Boston",
+        location: 64,
+        advance: {
+          amount: 1,
+          type: "Hour"
+        }
+      }
+    ],
+    telephone: true,
+    previous: ["Arkham"],
+  },
+  38: {
+    type: "SpecialActionEntry",
+    locationName: "Retail Store",
+    paragraph: `This retailer accepts currency from any country. You can buy any item or weapon listed.`,
+    specialAction: [
+      {
+        text: "Purchase something",
+        action: "Purchase",
+      }
+    ],
+    goTo: [
+      {
+        text: "You decide to head somewhere else",
+        location: "CurrentLocationTable",
+        advance: {
+          amount: 1,
+          type: "Hour"
+        }
+      }
+    ],
+    telephone: false,
+    previous: ["Arkham", "New York", "Athens", "Alexandria", "Bremen"],
+  },
+
+
+
+
+
+
+
+
+  102: (currentCharacter, currentDate, locationsVisited) => currentDate > new Date(1931, 8, 1) && locationsVisited.includes(102)
     ? {
       locationName: null,
       paragraph: "It is after September 8th.",
@@ -546,159 +668,205 @@ const Entries = {
     telephone: false,
     previous: [102],
   },
-  "Arkham": [
-    {
-      open: {
-        days: [2, 3, 4, 5, 6],
-        hours: [9, 10, 11, 12, 13, 14, 15],
-      },
-      goTo: [
+  165: {
+    type: "SkillCheckEntry",
+    locationName: null,
+    paragraph: "Except for detritus normal to an academic life , you find nothing. For another hour of searching and a successful Spot Hidden ,go to - 5- . Or go to any Afkham localion",
+    skillCheck: {
+      skill: "Spot Hidden",
+      passText: "",
+      passGoTo: [
         {
-          text: "Arkham First National Bank",
-          location: 3,
+          text: "You spend more time searching",
+          location: 5,
+          advance: {
+            amount: 1,
+            type: "Hour"
+          }
+        },
+        {
+          text: "Go to any Arkham location.",
+          location: "Arkham",
           advance: {
             amount: 1,
             type: "Hour"
           }
         }
       ],
-      telephone: false,
-    },
-    {
-      open: {
-        days: [1, 2, 3, 4, 5, 6, 7],
-        hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
-      },
-      goTo: [
+      failText: `You failed to find anything useful`,
+      failGoTo: [
         {
-          text: "Hospital",
-          location: 585,
+          text: "Go to any Arkham location.",
+          location: "Arkham",
           advance: {
             amount: 1,
             type: "Hour"
           }
         }
       ],
-      telephone: false,
     },
-    {
-      open: {
-        days: [1, 2, 3, 4, 5, 6, 7],
-        hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
-      },
-      goTo: [
-        {
-          text: "Arkham (Boston & Maine RR) Depot",
-          location: 16,
-          advance: {
-            amount: 1,
-            type: "Hour"
+    goTo: [],
+    telephone: false,
+    previous: [120],
+  },
+  "Arkham": (currentCharacter, currentDate, locationsVisited) => ({
+    type: "LocationTable",
+    locations: [
+      {
+        open: {
+          days: [2, 3, 4, 5, 6],
+          hours: [9, 10, 11, 12, 13, 14, 15],
+        },
+        goTo: [
+          {
+            text: "Arkham First National Bank",
+            location: 3,
+            advance: {
+              amount: 1,
+              type: "Hour"
+            }
           }
-        }
-      ],
-      telephone: true,
-    },
-    {
-      open: {
-        days: [2, 3, 4, 5, 6, 7],
-        hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        ],
+        telephone: false,
       },
-      goTo: [
-        {
-          text: "Arkham General Store",
-          location: 38,
-          advance: {
-            amount: 1,
-            type: "Hour"
+      {
+        open: {
+          days: [1, 2, 3, 4, 5, 6, 7],
+          hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+        },
+        goTo: [
+          {
+            text: "Hospital",
+            location: 585,
+            advance: {
+              amount: 1,
+              type: "Hour"
+            }
           }
-        }
-      ],
-      telephone: false,
-    },
-    {
-      open: {
-        days: [2, 3, 4, 5, 6],
-        hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        ],
+        telephone: false,
       },
-      goTo: [
-        {
-          text: "Arkham Advertiser Newspaper",
-          location: 60,
-          advance: {
-            amount: 1,
-            type: "Hour"
+      {
+        open: {
+          days: [1, 2, 3, 4, 5, 6, 7],
+          hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+        },
+        goTo: [
+          {
+            text: "Arkham (Boston & Maine RR) Depot",
+            location: 16,
+            advance: {
+              amount: 1,
+              type: "Hour"
+            }
           }
-        }
-      ],
-      telephone: true,
-    },
-    {
-      open: {
-        days: [2, 3, 4, 5, 6],
-        hours: [9, 10, 11, 12, 13, 14, 15, 16],
+        ],
+        telephone: true,
       },
-      goTo: [
-        {
-          text: "Harding House",
-          location: 113,
-          advance: {
-            amount: 1,
-            type: "Hour"
+      {
+        open: {
+          days: [2, 3, 4, 5, 6, 7],
+          hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        },
+        goTo: [
+          {
+            text: "Arkham General Store",
+            location: 38,
+            advance: {
+              amount: 1,
+              type: "Hour"
+            }
           }
-        }
-      ],
-      telephone: false,
-    },
-    {
-      open: {
-        days: [2, 3, 4, 5, 6],
-        hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        ],
+        telephone: false,
       },
-      goTo: [
-        {
-          text: "Miskatonic University",
-          location: 82,
-          advance: {
-            amount: 1,
-            type: "Hour"
+      {
+        open: {
+          days: [2, 3, 4, 5, 6],
+          hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        },
+        goTo: [
+          {
+            text: "Arkham Advertiser Newspaper",
+            location: 60,
+            advance: {
+              amount: 1,
+              type: "Hour"
+            }
           }
-        }
-      ],
-      telephone: true,
-    },
-    {
-      open: {
-        days: [2, 3, 4, 5, 6],
-        hours: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        ],
+        telephone: true,
       },
-      goTo: [
-        {
-          text: "Bee's Diner",
-          location: 593,
-          advance: {
-            amount: 1,
-            type: "Hour"
+      {
+        open: {
+          days: [2, 3, 4, 5, 6],
+          hours: [9, 10, 11, 12, 13, 14, 15, 16],
+        },
+        goTo: [
+          {
+            text: "Harding House",
+            location: 113,
+            advance: {
+              amount: 1,
+              type: "Hour"
+            }
           }
-        }
-      ],
-      telephone: false,
-    },
-    {
-      open: {
-        days: [2, 3, 4, 5, 6],
-        hours: [9, 10, 11, 12, 13, 14, 15],
+        ],
+        telephone: false,
       },
-      goTo: [
-        {
-          text: "Grunewald's Home",
-          location: 102,
-          advance: {
-            amount: 1,
-            type: "Hour"
+      {
+        open: {
+          days: [2, 3, 4, 5, 6],
+          hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        },
+        goTo: [
+          {
+            text: "Miskatonic University",
+            location: 82,
+            advance: {
+              amount: 1,
+              type: "Hour"
+            }
           }
-        }
-      ],
-      telephone: false,
-    },
-  ]
+        ],
+        telephone: true,
+      },
+      {
+        open: {
+          days: [2, 3, 4, 5, 6],
+          hours: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        },
+        goTo: [
+          {
+            text: "Bee's Diner",
+            location: 593,
+            advance: {
+              amount: 1,
+              type: "Hour"
+            }
+          }
+        ],
+        telephone: false,
+      },
+      {
+        open: {
+          days: [2, 3, 4, 5, 6],
+          hours: [9, 10, 11, 12, 13, 14, 15],
+        },
+        goTo: [
+          {
+            text: "Grunewald's Home",
+            location: 102,
+            advance: {
+              amount: 1,
+              type: "Hour"
+            }
+          }
+        ],
+        telephone: false,
+      }
+    ],
+  })
 }
+
+export default Entries;

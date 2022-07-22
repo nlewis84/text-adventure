@@ -1,0 +1,28 @@
+{
+  "name": "text-adventure",
+  "version": "1.0.0",
+  "description": "![Twitter Follow](https://img.shields.io/twitter/follow/nlewis84?style=social)",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nlewis84/text-adventure.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nlewis84/text-adventure/issues"
+  },
+  "homepage": "https://github.com/nlewis84/text-adventure#readme",
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "chalk-animation": "^2.0.2",
+    "gradient-string": "^2.0.1",
+    "inquirer": "^9.0.2",
+    "nanospinner": "^1.1.0"
+  }
+}
